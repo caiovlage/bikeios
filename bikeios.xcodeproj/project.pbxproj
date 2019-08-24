@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,7 @@
 		25B79AE62310C4BE005A5C18 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25B79AE42310C4BE005A5C18 /* LaunchScreen.storyboard */; };
 		25B79AF12310C4BE005A5C18 /* bikeiosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B79AF02310C4BE005A5C18 /* bikeiosTests.swift */; };
 		25B79AFC2310C4BE005A5C18 /* bikeiosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B79AFB2310C4BE005A5C18 /* bikeiosUITests.swift */; };
+		25C900842310E98300489FEB /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 25C900832310E98300489FEB /* Default.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,10 @@
 		25B79AF72310C4BE005A5C18 /* bikeiosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = bikeiosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		25B79AFB2310C4BE005A5C18 /* bikeiosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bikeiosUITests.swift; sourceTree = "<group>"; };
 		25B79AFD2310C4BE005A5C18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		25C900832310E98300489FEB /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../vaidebikeios/vaidebikeios/Assets.xcassets/Default.png; sourceTree = "<group>"; };
+		6E54324E4BF094F77BB82571 /* libPods-bikeios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bikeios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		758BD315593813A9C9052604 /* Pods-bikeios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bikeios.debug.xcconfig"; path = "Target Support Files/Pods-bikeios/Pods-bikeios.debug.xcconfig"; sourceTree = "<group>"; };
+		E230C8676B84B85A12B0866E /* Pods-bikeios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bikeios.release.xcconfig"; path = "Target Support Files/Pods-bikeios/Pods-bikeios.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,13 +79,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		129F76639B5C910716411ABE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6E54324E4BF094F77BB82571 /* libPods-bikeios.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		25B79ACF2310C4BD005A5C18 = {
 			isa = PBXGroup;
 			children = (
+				25C900832310E98300489FEB /* Default.png */,
 				25B79ADA2310C4BD005A5C18 /* bikeios */,
 				25B79AEF2310C4BE005A5C18 /* bikeiosTests */,
 				25B79AFA2310C4BE005A5C18 /* bikeiosUITests */,
 				25B79AD92310C4BD005A5C18 /* Products */,
+				7874F23E715D31D38A73461A /* Pods */,
+				129F76639B5C910716411ABE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,6 +141,15 @@
 			path = bikeiosUITests;
 			sourceTree = "<group>";
 		};
+		7874F23E715D31D38A73461A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				758BD315593813A9C9052604 /* Pods-bikeios.debug.xcconfig */,
+				E230C8676B84B85A12B0866E /* Pods-bikeios.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +157,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 25B79B002310C4BE005A5C18 /* Build configuration list for PBXNativeTarget "bikeios" */;
 			buildPhases = (
+				E415867B4150A77FF531A0BF /* [CP] Check Pods Manifest.lock */,
 				25B79AD42310C4BD005A5C18 /* Sources */,
 				25B79AD52310C4BD005A5C18 /* Frameworks */,
 				25B79AD62310C4BD005A5C18 /* Resources */,
+				640F53C67AF71A59E723232A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -205,7 +232,7 @@
 				};
 			};
 			buildConfigurationList = 25B79AD32310C4BD005A5C18 /* Build configuration list for PBXProject "bikeios" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -232,6 +259,7 @@
 				25B79AE62310C4BE005A5C18 /* LaunchScreen.storyboard in Resources */,
 				25B79AE32310C4BE005A5C18 /* Assets.xcassets in Resources */,
 				25B79AE12310C4BD005A5C18 /* Main.storyboard in Resources */,
+				25C900842310E98300489FEB /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +278,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		640F53C67AF71A59E723232A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-bikeios/Pods-bikeios-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-bikeios/Pods-bikeios-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-bikeios/Pods-bikeios-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E415867B4150A77FF531A0BF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-bikeios-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		25B79AD42310C4BD005A5C18 /* Sources */ = {
@@ -430,10 +500,13 @@
 		};
 		25B79B012310C4BE005A5C18 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 758BD315593813A9C9052604 /* Pods-bikeios.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9CBLMJY2ZP;
 				INFOPLIST_FILE = bikeios/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -447,10 +520,13 @@
 		};
 		25B79B022310C4BE005A5C18 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E230C8676B84B85A12B0866E /* Pods-bikeios.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9CBLMJY2ZP;
 				INFOPLIST_FILE = bikeios/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

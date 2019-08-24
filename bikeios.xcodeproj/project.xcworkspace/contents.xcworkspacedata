@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:bikeios.xcodeproj">
+      location = "self:/Users/caio/workspace_ios/bikeios/bikeios.xcodeproj">
    </FileRef>
 </Workspace>
