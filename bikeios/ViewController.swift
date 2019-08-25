@@ -80,29 +80,17 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
                 {
                     DispatchQueue.main.async(execute: {
                         
-                        print(Double((json2["latitude"] as AnyObject? as? String) ?? "0.0" ))
-                        
-                        let marker = GMSMarker()
-                        marker.position = CLLocationCoordinate2D(latitude: Double( (json2["latitude"] as AnyObject? as? String) ?? "0.0" ) as! CLLocationDegrees, longitude: Double( (json2["latitude"] as AnyObject? as? String) ?? "0.0" ) as! CLLocationDegrees)
-                        marker.map = self.mapView
-                       
+                        if let latitude = (json2["latitude"] as? NSString)?.doubleValue
+                        {
+                            if let longitude = (json2["longitude"] as? NSString)?.doubleValue
+                            {
+                                let marker = GMSMarker()
+                                marker.position = CLLocationCoordinate2D(latitude:latitude , longitude:longitude)
+                                marker.map = self.mapView
+                            }
+                        }
                     })
-                    
-                  //  marker.position = CLLocationCoordinate2D(latitude: Double( (json2["latitude"] as AnyObject? as? String) ?? "0.0" ) as! CLLocationDegrees , longitude: Double( (json2["longitude"] as AnyObject? as? String) ?? "0.0" ) as! CLLocationDegrees)
-
-                    // let position = CLLocationCoordinate2D(latitude: 10, longitude: 10)
-                    //let marker = GMSMarker(position: position)
-                    //marker.title = "Hello World"
-                    //marker.map = mapView
-                    
-                    //print(Double( (json2["latitude"] as AnyObject? as? String) ?? "0.0" ));
                 }
-                
-             //   let marker = GMSMarker()
-               // marker.position = CLLocationCoordinate2D(latitude: (json["latitude"] as? Double) ?? 0,longitude: json["longitude"] as? Double ?? 0)
-                //marker.map = mapView
-           // list.append(Localizacao( latitude: (json["latitude"] as AnyObject? as? Double) ?? 0,
-           //                          longitude: json["longitude"] as AnyObject? as? Double ?? 0))
             }
         }
     }
