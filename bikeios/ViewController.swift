@@ -14,6 +14,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
     var locationManager = CLLocationManager()
     lazy var mapView = GMSMapView()
     let urlToRequest = "https://gruposolarbrasil.com.br/json/localizacoes"
+    var startPosition = CLLocationCoordinate2D()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,8 +36,9 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation = locations.last
-        let center = CLLocationCoordinate2D(latitude: userLocation!.coordinate.latitude, longitude: userLocation!.coordinate.longitude)
         
+        let center = CLLocationCoordinate2D(latitude: userLocation!.coordinate.latitude, longitude: userLocation!.coordinate.longitude)
+        startPosition = center
         let camera = GMSCameraPosition.camera(withLatitude: userLocation!.coordinate.latitude,
                                               longitude: userLocation!.coordinate.longitude, zoom: 17)
         mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
@@ -74,10 +76,9 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
             
             var bounds = GMSCoordinateBounds()
              DispatchQueue.main.async(execute: {
-            
+                bounds = bounds.includingCoordinate(self.startPosition)
                 for json in anyObj as! Array<AnyObject>
                 {
-                
                     for json2 in json as! Array<AnyObject>
                     {
                         if let latitude = (json2["latitude"] as? NSString)?.doubleValue
