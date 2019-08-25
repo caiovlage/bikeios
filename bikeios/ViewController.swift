@@ -87,6 +87,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
                             {
                                 let marker = GMSMarker()
                                 marker.position = CLLocationCoordinate2D(latitude:latitude , longitude:longitude)
+                                marker.icon = UIImage(named: "marker_vai_de_bike")
                                 marker.map = self.mapView
                                 bounds = bounds.includingCoordinate(marker.position)
                             }
