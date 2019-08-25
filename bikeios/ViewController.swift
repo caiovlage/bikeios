@@ -25,8 +25,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
     }
 
     override func loadView() {
-        // Create a GMSCameraPosition that tells the map to display the
-        // coordinate -33.86,151.20 at zoom level 6.
+        
         let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
        mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         view = mapView
@@ -39,7 +38,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
         let center = CLLocationCoordinate2D(latitude: userLocation!.coordinate.latitude, longitude: userLocation!.coordinate.longitude)
         
         let camera = GMSCameraPosition.camera(withLatitude: userLocation!.coordinate.latitude,
-                                              longitude: userLocation!.coordinate.longitude, zoom: 0)
+                                              longitude: userLocation!.coordinate.longitude, zoom: 17)
         mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         mapView.isMyLocationEnabled = true
         self.view = mapView
@@ -73,13 +72,14 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
     func parseJson(anyObj:AnyObject){
         if  anyObj is Array<AnyObject> {
             
-            for json in anyObj as! Array<AnyObject>
-            {
-                
-                for json2 in json as! Array<AnyObject>
+            var bounds = GMSCoordinateBounds()
+             DispatchQueue.main.async(execute: {
+            
+                for json in anyObj as! Array<AnyObject>
                 {
-                    DispatchQueue.main.async(execute: {
-                        
+                
+                    for json2 in json as! Array<AnyObject>
+                    {
                         if let latitude = (json2["latitude"] as? NSString)?.doubleValue
                         {
                             if let longitude = (json2["longitude"] as? NSString)?.doubleValue
@@ -87,16 +87,14 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
                                 let marker = GMSMarker()
                                 marker.position = CLLocationCoordinate2D(latitude:latitude , longitude:longitude)
                                 marker.map = self.mapView
+                                bounds = bounds.includingCoordinate(marker.position)
                             }
                         }
-                    })
+                    }
                 }
-            }
+                let update = GMSCameraUpdate.fit(bounds, withPadding: 50)
+                self.mapView.animate(with: update)
+            })
         }
-    }
-    
-    struct Localizacao:Decodable {
-        var latitude = 0.0
-        var longitude = 0.0
     }
 }
