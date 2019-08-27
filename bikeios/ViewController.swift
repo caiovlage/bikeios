@@ -10,11 +10,12 @@ import GoogleMaps
 
 class ViewController: UIViewController , CLLocationManagerDelegate{
 
-    
     var locationManager = CLLocationManager()
     lazy var mapView = GMSMapView()
-    let urlToRequest = "https://gruposolarbrasil.com.br/json/localizacoes"
+    let urlLocalizacoes = "https://gruposolarbrasil.com.br/json/localizacoes"
+    let urlTelefone = "https://gruposolarbrasil.com.br/json/telefone"
     var startPosition = CLLocationCoordinate2D()
+    var telefone = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +24,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
+
     }
 
     override func loadView() {
@@ -31,7 +33,8 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
        mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         view = mapView
         mapView.isMyLocationEnabled = true
-        dataRequest()
+        dataRequestLocalizacoes(url: urlLocalizacoes)
+        dataRequestTelefone(url: urlTelefone)
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -46,11 +49,10 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
         self.view = mapView
         locationManager.stopUpdatingLocation()
     }
-
     
-    func dataRequest() {
+    func dataRequestLocalizacoes(url:String) {
         
-        let url4 = URL(string: urlToRequest)!
+        let url4 = URL(string: url)!
         let session4 = URLSession.shared
         let request = NSMutableURLRequest(url: url4)
         request.httpMethod = "GET"
@@ -62,7 +64,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
             }
             do{
             let anyObj: AnyObject? = try JSONSerialization.jsonObject(with: data as! Data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as AnyObject
-                self.parseJson(anyObj: anyObj!)
+                self.parseJsonLocalizacoes(anyObj: anyObj!)
             }catch
             {
                 
@@ -71,11 +73,12 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
         task.resume()
     }
     
-    func parseJson(anyObj:AnyObject){
+    func parseJsonLocalizacoes(anyObj:AnyObject){
         if  anyObj is Array<AnyObject> {
             
             var bounds = GMSCoordinateBounds()
              DispatchQueue.main.async(execute: {
+                
                 bounds = bounds.includingCoordinate(self.startPosition)
                 for json in anyObj as! Array<AnyObject>
                 {
@@ -87,7 +90,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
                             {
                                 let marker = GMSMarker()
                                 marker.position = CLLocationCoordinate2D(latitude:latitude , longitude:longitude)
-                                marker.icon = UIImage(named: "marker_vai_de_bike")
+                                marker.icon = UIImage(named: "marker")
                                 marker.map = self.mapView
                                 bounds = bounds.includingCoordinate(marker.position)
                             }
@@ -98,5 +101,57 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
                 self.mapView.animate(with: update)
             })
         }
+    }
+    
+    func dataRequestTelefone(url:String) {
+        
+        let url4 = URL(string: url)!
+        let session4 = URLSession.shared
+        let request = NSMutableURLRequest(url: url4)
+        request.httpMethod = "GET"
+        request.cachePolicy = NSURLRequest.CachePolicy.reloadIgnoringCacheData
+        let task = session4.dataTask(with: request as URLRequest) { (data, response, error) in
+            guard let _: Data = data, let _: URLResponse = response, error == nil else {
+                print("*****error")
+                return
+            }
+            do{
+                let anyObj: AnyObject? = try JSONSerialization.jsonObject(with: data as! Data, options: JSONSerialization.ReadingOptions(rawValue: 0)) as AnyObject
+                self.parseJsonTelefone(anyObj: anyObj!)
+            }catch
+            {
+            }
+        }
+        task.resume()
+    }
+    
+    func parseJsonTelefone(anyObj:AnyObject)
+    {
+        if  anyObj is Array<AnyObject>
+        {
+            DispatchQueue.main.async(execute:
+            {
+                for json in anyObj as! Array<AnyObject>
+                {
+                        if let number = (json["number"] as? String)
+                        {
+                           self.telefone = number
+                        }
+                }
+                let image = UIImage(named: "help") as UIImage?
+                let button = UIButton(frame: CGRect(x: self.view.frame.maxX - 66, y: self.view.frame.maxY - 66, width: 60, height: 60))
+                button.setImage(image, for: .normal)
+                button.setTitle("Button", for: .normal)
+                button.setTitleColor(.red, for: .normal)
+                button.tag = 5
+                button.addTarget(self, action: #selector(self.buttonAction), for: .touchUpInside)
+                self.mapView.addSubview(button)
+            })
+        }
+    }
+    @objc func buttonAction(sender: UIButton!) {
+        let help = storyboard?.instantiateViewController(withIdentifier: "HelpController") as! HelpController
+        help.telefone = self.telefone
+        navigationController?.pushViewController(help, animated: true)
     }
 }
