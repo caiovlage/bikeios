@@ -10,6 +10,7 @@ import GoogleMaps
 
 class ViewController: UIViewController , CLLocationManagerDelegate{
 
+    let progress = Progress(text: "Carregando...")
     var locationManager = CLLocationManager()
     lazy var mapView = GMSMapView()
     let urlLocalizacoes = "https://gruposolarbrasil.com.br/json/localizacoes"
@@ -17,9 +18,12 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
     var startPosition = CLLocationCoordinate2D()
     var telefone = ""
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -33,6 +37,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
        mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         view = mapView
         mapView.isMyLocationEnabled = true
+        
         dataRequestLocalizacoes(url: urlLocalizacoes)
         dataRequestTelefone(url: urlTelefone)
     }
@@ -48,6 +53,9 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
         mapView.isMyLocationEnabled = true
         self.view = mapView
         locationManager.stopUpdatingLocation()
+        
+        self.view.addSubview(progress)
+        
     }
     
     func dataRequestLocalizacoes(url:String) {
@@ -67,7 +75,6 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
                 self.parseJsonLocalizacoes(anyObj: anyObj!)
             }catch
             {
-                
             }
         }
         task.resume()
@@ -138,14 +145,15 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
                            self.telefone = number
                         }
                 }
-                let image = UIImage(named: "help") as UIImage?
-                let button = UIButton(frame: CGRect(x: self.view.frame.maxX - 66, y: self.view.frame.maxY - 66, width: 60, height: 60))
+                let image = UIImage(named: "h") as UIImage?
+                let button = UIButton(frame: CGRect(x: self.view.frame.maxX - 55, y: self.view.frame.maxY - 66, width: 60, height: 60))
                 button.setImage(image, for: .normal)
                 button.setTitle("Button", for: .normal)
                 button.setTitleColor(.red, for: .normal)
                 button.tag = 5
                 button.addTarget(self, action: #selector(self.buttonAction), for: .touchUpInside)
                 self.mapView.addSubview(button)
+                self.progress.hide()
             })
         }
     }

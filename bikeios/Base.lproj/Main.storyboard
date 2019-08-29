@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Vai De Bike-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="bikeios" customModuleProvider="target" sceneMemberID="viewController">
@@ -21,7 +21,9 @@
                         <accessibility key="accessibilityConfiguration" identifier="Help"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="55i-1G-bPT"/>
+                    <navigationItem key="navigationItem" title="Vai De Bike" id="55i-1G-bPT">
+                        <barButtonItem key="backBarButtonItem" title="Voltar" id="kc5-mh-XOf"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -36,31 +38,47 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Central de Ajuda" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uWv-7E-5eP">
-                                <rect key="frame" x="83" y="80" width="249" height="42"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
+                                <rect key="frame" x="114" y="87" width="186" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <color key="highlightedColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Entre em contato com o pessoal do vai de bike por telefone." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="7dh-iw-96i">
-                                <rect key="frame" x="87" y="154" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="Phone" translatesAutoresizingMaskIntoConstraints="NO" id="O23-Bw-8Mf" colorLabel="IBBuiltInLabel-Blue">
+                                <rect key="frame" x="84" y="204" width="246" height="159"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Entre em contato com o pessoal do vai de bike por telefone." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="7dh-iw-96i">
+                                        <rect key="frame" x="16" y="6" width="214" height="92"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xck-cT-rfV">
+                                        <rect key="frame" x="91" y="93" width="65" height="66"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="phone.png"/>
+                                        <connections>
+                                            <action selector="callPhone:" destination="10k-k3-iWx" eventType="touchUpInside" id="PzO-hA-IAZ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xck-cT-rfV">
-                                <rect key="frame" x="175" y="335" width="65" height="66"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <state key="normal" image="phone.png"/>
-                                <connections>
-                                    <action selector="callPhone:" destination="10k-k3-iWx" eventType="touchUpInside" id="PzO-hA-IAZ"/>
-                                </connections>
-                            </button>
+                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <accessibility key="accessibilityConfiguration" identifier="Phone">
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
+                                <rect key="contentStretch" x="0.34999999999999998" y="0.29999999999999999" width="0.94999999999999996" height="1"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="xYM-Z4-mBu"/>
                     </view>
+                    <connections>
+                        <outlet property="Phone" destination="O23-Bw-8Mf" id="azT-1f-ygk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VMx-g8-a3M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
