@@ -97,7 +97,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
                             {
                                 let marker = GMSMarker()
                                 marker.position = CLLocationCoordinate2D(latitude:latitude , longitude:longitude)
-                                marker.icon = UIImage(named: "marker")
+                                marker.icon = self.resizeImage(image: UIImage(named: "marker")!, targetSize: CGSize(width:87.0, height:90.0) )
                                 marker.map = self.mapView
                                 bounds = bounds.includingCoordinate(marker.position)
                             }
@@ -154,6 +154,17 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
                 button.addTarget(self, action: #selector(self.buttonAction), for: .touchUpInside)
                 self.mapView.addSubview(button)
                 self.progress.hide()
+                
+                let path = GMSMutablePath()
+                path.add(CLLocationCoordinate2D(latitude: -22.9549675, longitude: -43.3382097))
+                path.add(CLLocationCoordinate2D(latitude:-22.9549471,longitude: -43.3375861))
+                path.add(CLLocationCoordinate2D(latitude:-22.9544223,longitude: -43.3375385))
+                path.add(CLLocationCoordinate2D(latitude: -22.9541315,longitude: -43.3384109))
+                
+                let polygon = GMSPolygon(path: path)
+                polygon.fillColor = UIColor(red: 0, green:10, blue: 0, alpha: 0.2);//23, 183, 138
+                polygon.strokeWidth = 0.0
+                polygon.map = self.mapView
             })
         }
     }
@@ -161,5 +172,32 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
         let help = storyboard?.instantiateViewController(withIdentifier: "HelpController") as! HelpController
         help.telefone = self.telefone
         navigationController?.pushViewController(help, animated: true)
+    }
+    
+    
+    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+        let size = image.size
+        
+        let widthRatio  = targetSize.width  / size.width
+        let heightRatio = targetSize.height / size.height
+        
+        // Figure out what our orientation is, and use that to form the rectangle
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
+        }
+        
+        // This is the rect that we've calculated out and this is what is actually used below
+        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+        
+        // Actually do the resizing to the rect using the ImageContext stuff
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
     }
 }

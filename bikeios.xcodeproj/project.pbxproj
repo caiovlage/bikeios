@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		252076E92313524A00FC1669 /* marker.png in Resources */ = {isa = PBXBuildFile; fileRef = 252076E82313524900FC1669 /* marker.png */; };
 		252076EB231355E200FC1669 /* help.png in Resources */ = {isa = PBXBuildFile; fileRef = 252076EA231355E200FC1669 /* help.png */; };
 		25B79ADC2310C4BD005A5C18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B79ADB2310C4BD005A5C18 /* AppDelegate.swift */; };
 		25B79ADE2310C4BD005A5C18 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B79ADD2310C4BD005A5C18 /* ViewController.swift */; };
@@ -21,6 +20,7 @@
 		25EDE65623173AAA002D672E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 25EDE65523173AAA002D672E /* Default.png */; };
 		25EDE65A23173F8D002D672E /* h.png in Resources */ = {isa = PBXBuildFile; fileRef = 25EDE65923173F8D002D672E /* h.png */; };
 		25EDE65C23176657002D672E /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25EDE65B23176657002D672E /* Progress.swift */; };
+		25EDE65E2317731C002D672E /* marker.png in Resources */ = {isa = PBXBuildFile; fileRef = 25EDE65D2317731C002D672E /* marker.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,7 +41,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		252076E82313524900FC1669 /* marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = marker.png; path = ../../Desktop/marker.png; sourceTree = "<group>"; };
 		252076EA231355E200FC1669 /* help.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = help.png; path = ../../workspace_android/bike/app/src/main/res/drawable/help.png; sourceTree = "<group>"; };
 		25B79AD82310C4BD005A5C18 /* bikeios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bikeios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25B79ADB2310C4BD005A5C18 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +60,7 @@
 		25EDE65523173AAA002D672E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 		25EDE65923173F8D002D672E /* h.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = h.png; path = ../../Desktop/h.png; sourceTree = "<group>"; };
 		25EDE65B23176657002D672E /* Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
+		25EDE65D2317731C002D672E /* marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = marker.png; path = ../marker.png; sourceTree = "<group>"; };
 		6E54324E4BF094F77BB82571 /* libPods-bikeios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-bikeios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		758BD315593813A9C9052604 /* Pods-bikeios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bikeios.debug.xcconfig"; path = "Target Support Files/Pods-bikeios/Pods-bikeios.debug.xcconfig"; sourceTree = "<group>"; };
 		E230C8676B84B85A12B0866E /* Pods-bikeios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bikeios.release.xcconfig"; path = "Target Support Files/Pods-bikeios/Pods-bikeios.release.xcconfig"; sourceTree = "<group>"; };
@@ -102,11 +102,11 @@
 		25B79ACF2310C4BD005A5C18 = {
 			isa = PBXGroup;
 			children = (
+				25EDE65D2317731C002D672E /* marker.png */,
 				25EDE65923173F8D002D672E /* h.png */,
 				25EDE65523173AAA002D672E /* Default.png */,
 				25D85F772314C84600A54B01 /* phone.png */,
 				252076EA231355E200FC1669 /* help.png */,
-				252076E82313524900FC1669 /* marker.png */,
 				25B79ADA2310C4BD005A5C18 /* bikeios */,
 				25B79AEF2310C4BE005A5C18 /* bikeiosTests */,
 				25B79AFA2310C4BE005A5C18 /* bikeiosUITests */,
@@ -276,12 +276,12 @@
 			files = (
 				25EDE65A23173F8D002D672E /* h.png in Resources */,
 				25B79AE62310C4BE005A5C18 /* LaunchScreen.storyboard in Resources */,
-				252076E92313524A00FC1669 /* marker.png in Resources */,
 				25EDE65623173AAA002D672E /* Default.png in Resources */,
 				252076EB231355E200FC1669 /* help.png in Resources */,
 				25B79AE32310C4BE005A5C18 /* Assets.xcassets in Resources */,
 				25B79AE12310C4BD005A5C18 /* Main.storyboard in Resources */,
 				25D85F782314C84600A54B01 /* phone.png in Resources */,
+				25EDE65E2317731C002D672E /* marker.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
