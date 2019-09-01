@@ -17,6 +17,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
     let urlTelefone = "https://gruposolarbrasil.com.br/json/telefone"
     var startPosition = CLLocationCoordinate2D()
     var telefone = ""
+    var bounds = GMSCoordinateBounds()
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
@@ -28,6 +29,15 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
         locationManager.requestWhenInUseAuthorization()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
+        
+        self.navigationController?.navigationBar.layer.masksToBounds = false
+        self.navigationController?.navigationBar.layer.shadowColor = UIColor.black.cgColor
+        self.navigationController?.navigationBar.layer.shadowOpacity = 0.6
+        self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+        self.navigationController?.navigationBar.layer.shadowRadius = 2
+        
+        self.navigationController?.navigationBar.setBottomBorderColor(color: UIColor.white , height:3)
+        
 
     }
 
@@ -35,9 +45,18 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
         
         let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 6.0)
        mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
+        do {
+            // Set the map style by passing the URL of the local file.
+            if let styleURL = Bundle.main.url(forResource: "style", withExtension: "json") {
+                mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+            } else {
+                NSLog("Unable to find style.json")
+            }
+        } catch {
+            NSLog("One or more of the map styles failed to load. \(error)")
+        }
         view = mapView
         mapView.isMyLocationEnabled = true
-        
         dataRequestLocalizacoes(url: urlLocalizacoes)
         dataRequestTelefone(url: urlTelefone)
     }
@@ -48,16 +67,32 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
         let center = CLLocationCoordinate2D(latitude: userLocation!.coordinate.latitude, longitude: userLocation!.coordinate.longitude)
         startPosition = center
         let camera = GMSCameraPosition.camera(withLatitude: userLocation!.coordinate.latitude,
-                                              longitude: userLocation!.coordinate.longitude, zoom: 17)
+                                              longitude: userLocation!.coordinate.longitude, zoom: 16)
         mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         mapView.isMyLocationEnabled = true
+        mapView.settings.compassButton = true
+        
+        mapView.padding = UIEdgeInsets(top: 0, left: 0, bottom: 100, right: 0)
         self.view = mapView
         locationManager.stopUpdatingLocation()
         
         self.view.addSubview(progress)
-        
+        mapView.setMinZoom(10.0, maxZoom: 30.0)
+        //mapView.settings.myLocationButton = true
+        do {
+            // Set the map style by passing the URL of the local file.
+            if let styleURL = Bundle.main.url(forResource: "style", withExtension: "json") {
+                mapView.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+            } else {
+                NSLog("Unable to find style.json")
+            }
+        } catch {
+            NSLog("One or more of the map styles failed to load. \(error)")
+        }
+        self.addControls()
     }
     
+   
     func dataRequestLocalizacoes(url:String) {
         
         let url4 = URL(string: url)!
@@ -83,10 +118,9 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
     func parseJsonLocalizacoes(anyObj:AnyObject){
         if  anyObj is Array<AnyObject> {
             
-            var bounds = GMSCoordinateBounds()
              DispatchQueue.main.async(execute: {
                 
-                bounds = bounds.includingCoordinate(self.startPosition)
+                self.bounds = self.bounds.includingCoordinate(self.startPosition)
                 for json in anyObj as! Array<AnyObject>
                 {
                     for json2 in json as! Array<AnyObject>
@@ -97,15 +131,13 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
                             {
                                 let marker = GMSMarker()
                                 marker.position = CLLocationCoordinate2D(latitude:latitude , longitude:longitude)
-                                marker.icon = self.resizeImage(image: UIImage(named: "marker")!, targetSize: CGSize(width:87.0, height:90.0) )
+                                marker.icon = self.resizeImage(image: UIImage(named: "marker")!, targetSize: CGSize(width:42.0, height:48.0) )
                                 marker.map = self.mapView
-                                bounds = bounds.includingCoordinate(marker.position)
+                                self.bounds = self.bounds.includingCoordinate(marker.position)
                             }
                         }
                     }
                 }
-                let update = GMSCameraUpdate.fit(bounds, withPadding: 50)
-                self.mapView.animate(with: update)
             })
         }
     }
@@ -145,33 +177,48 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
                            self.telefone = number
                         }
                 }
-                let image = UIImage(named: "h") as UIImage?
-                let button = UIButton(frame: CGRect(x: self.view.frame.maxX - 55, y: self.view.frame.maxY - 66, width: 60, height: 60))
-                button.setImage(image, for: .normal)
-                button.setTitle("Button", for: .normal)
-                button.setTitleColor(.red, for: .normal)
-                button.tag = 5
-                button.addTarget(self, action: #selector(self.buttonAction), for: .touchUpInside)
-                self.mapView.addSubview(button)
                 self.progress.hide()
-                
-                let path = GMSMutablePath()
-                path.add(CLLocationCoordinate2D(latitude: -22.9549675, longitude: -43.3382097))
-                path.add(CLLocationCoordinate2D(latitude:-22.9549471,longitude: -43.3375861))
-                path.add(CLLocationCoordinate2D(latitude:-22.9544223,longitude: -43.3375385))
-                path.add(CLLocationCoordinate2D(latitude: -22.9541315,longitude: -43.3384109))
-                
-                let polygon = GMSPolygon(path: path)
-                polygon.fillColor = UIColor(red: 0, green:10, blue: 0, alpha: 0.2);//23, 183, 138
-                polygon.strokeWidth = 0.0
-                polygon.map = self.mapView
+                self.addControls()
             })
         }
     }
+    
+    func addControls()
+    {
+        let image = UIImage(named: "h") as UIImage?
+        let button = UIButton(frame: CGRect(x: self.view.frame.maxX - 70, y: self.view.frame.maxY - 70, width: 70, height: 62))
+        button.setImage(image, for: .normal)
+        button.setTitle("Button", for: .normal)
+        button.setTitleColor(.red, for: .normal)
+        button.tag = 5
+        button.addTarget(self, action: #selector(self.buttonAction), for: .touchUpInside)
+        self.mapView.addSubview(button)
+        
+        
+        let imageBike = UIImage(named: "bike") as UIImage?
+        let buttonBike = UIButton(frame: CGRect(x: -1, y: self.view.frame.maxY - 70, width: 70, height: 61))
+        buttonBike.setImage(imageBike, for: .normal)
+        buttonBike.setTitle("Button", for: .normal)
+        buttonBike.setTitleColor(.red, for: .normal)
+        buttonBike.tag = 4
+        buttonBike.addTarget(self, action: #selector(self.zoomAll), for: .touchUpInside)
+        self.mapView.addSubview(buttonBike)
+    }
+    
     @objc func buttonAction(sender: UIButton!) {
         let help = storyboard?.instantiateViewController(withIdentifier: "HelpController") as! HelpController
         help.telefone = self.telefone
         navigationController?.pushViewController(help, animated: true)
+    }
+    
+    @objc func zoomAll(sender: UIButton!) {
+        self.clickShowAllLoications()
+    }
+    
+    func clickShowAllLoications()
+    {
+        let update = GMSCameraUpdate.fit(bounds, withPadding: 50)
+        self.mapView.animate(with: update)
     }
     
     
@@ -199,5 +246,22 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
         UIGraphicsEndImageContext()
         
         return newImage!
+    }
+}
+extension UINavigationBar {
+    
+    func setBottomBorderColor(color: UIColor, height: CGFloat) -> UIView {
+        let bottomBorderView = UIView(frame: CGRect())
+        bottomBorderView.translatesAutoresizingMaskIntoConstraints = false
+        bottomBorderView.backgroundColor = color
+        
+        self.addSubview(bottomBorderView)
+        
+        let views = ["border": bottomBorderView]
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[border]|", options: [], metrics: nil, views: views))
+        self.addConstraint(NSLayoutConstraint(item: bottomBorderView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: height))
+        self.addConstraint(NSLayoutConstraint(item: bottomBorderView, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1.0, constant: height))
+        
+        return bottomBorderView
     }
 }

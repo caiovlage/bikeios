@@ -21,10 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey("AIzaSyAEoRUcb7dnHfY7poYueLZtSeguCb---DA");
        // GMSPlacesClient.provideAPIKey("AIzaSyAEoRUcb7dnHfY7poYueLZtSeguCb---DA")
         Thread.sleep(forTimeInterval: 3.0)
-        //UINavigationBar.appearance().barTintColor = UIColor(red: 19.0/255.0, green: 79.0/255.0, blue: 111.0/255.0, alpha: 80)
-        //UINavigationBar.appearance().alpha = 80.0
-       // UINavigationBar.appearance().tintColor = UIColor(red: 19.0/255.0, green: 79.0/255.0, blue: 111.0/255.0, alpha: 1.0)
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor :  UIColor(red: 100.0/255.0, green: 100.0/255.0, blue: 100.0/255.0, alpha: 1.0)]
+        UINavigationBar.appearance().barTintColor = UIColor(red: 247.0/255.0, green: 162.0/255.0, blue: 28.0/255.0, alpha: 0.0)
+        UINavigationBar.appearance().tintColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor :  UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)]
         
        return true
     }
