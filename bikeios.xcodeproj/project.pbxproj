@@ -13,6 +13,8 @@
 		252AAEDB231AE7CB004DF8E5 /* bike.png in Resources */ = {isa = PBXBuildFile; fileRef = 252AAEDA231AE7CB004DF8E5 /* bike.png */; };
 		252AAEDD231AFAB4004DF8E5 /* marker.png in Resources */ = {isa = PBXBuildFile; fileRef = 252AAEDC231AFAB4004DF8E5 /* marker.png */; };
 		252AAEE1231AFE28004DF8E5 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 252AAEE0231AFE28004DF8E5 /* Default.png */; };
+		257716EE2320B70600ABFD4D /* center.png in Resources */ = {isa = PBXBuildFile; fileRef = 257716ED2320B70600ABFD4D /* center.png */; };
+		25AD063723208E820031BBA9 /* Nazegul-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 25AD063623208E820031BBA9 /* Nazegul-Regular.ttf */; };
 		25B79ADC2310C4BD005A5C18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B79ADB2310C4BD005A5C18 /* AppDelegate.swift */; };
 		25B79ADE2310C4BD005A5C18 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B79ADD2310C4BD005A5C18 /* ViewController.swift */; };
 		25B79AE12310C4BD005A5C18 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 25B79ADF2310C4BD005A5C18 /* Main.storyboard */; };
@@ -49,6 +51,8 @@
 		252AAEDA231AE7CB004DF8E5 /* bike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bike.png; sourceTree = "<group>"; };
 		252AAEDC231AFAB4004DF8E5 /* marker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = marker.png; sourceTree = "<group>"; };
 		252AAEE0231AFE28004DF8E5 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		257716ED2320B70600ABFD4D /* center.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = center.png; sourceTree = "<group>"; };
+		25AD063623208E820031BBA9 /* Nazegul-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nazegul-Regular.ttf"; sourceTree = "<group>"; };
 		25B79AD82310C4BD005A5C18 /* bikeios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bikeios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25B79ADB2310C4BD005A5C18 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		25B79ADD2310C4BD005A5C18 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +110,8 @@
 		25B79ACF2310C4BD005A5C18 = {
 			isa = PBXGroup;
 			children = (
+				257716ED2320B70600ABFD4D /* center.png */,
+				25AD063623208E820031BBA9 /* Nazegul-Regular.ttf */,
 				2518BAB3231C5D9F00DDCB4F /* h.png */,
 				2518BAB1231C2E1F00DDCB4F /* style.json */,
 				252AAEE0231AFE28004DF8E5 /* Default.png */,
@@ -289,6 +295,8 @@
 				252AAEDB231AE7CB004DF8E5 /* bike.png in Resources */,
 				25B79AE12310C4BD005A5C18 /* Main.storyboard in Resources */,
 				25D85F782314C84600A54B01 /* phone.png in Resources */,
+				25AD063723208E820031BBA9 /* Nazegul-Regular.ttf in Resources */,
+				257716EE2320B70600ABFD4D /* center.png in Resources */,
 				252AAEE1231AFE28004DF8E5 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

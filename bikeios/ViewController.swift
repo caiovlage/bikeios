@@ -35,10 +35,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
         self.navigationController?.navigationBar.layer.shadowOpacity = 0.6
         self.navigationController?.navigationBar.layer.shadowOffset = CGSize(width: 0, height: 2.0)
         self.navigationController?.navigationBar.layer.shadowRadius = 2
-        
         self.navigationController?.navigationBar.setBottomBorderColor(color: UIColor.white , height:3)
-        
-
     }
 
     override func loadView() {
@@ -77,7 +74,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
         locationManager.stopUpdatingLocation()
         
         self.view.addSubview(progress)
-        mapView.setMinZoom(10.0, maxZoom: 30.0)
+        //mapView.setMinZoom(10.0, maxZoom: 30.0)
         //mapView.settings.myLocationButton = true
         do {
             // Set the map style by passing the URL of the local file.
@@ -131,7 +128,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
                             {
                                 let marker = GMSMarker()
                                 marker.position = CLLocationCoordinate2D(latitude:latitude , longitude:longitude)
-                                marker.icon = self.resizeImage(image: UIImage(named: "marker")!, targetSize: CGSize(width:42.0, height:48.0) )
+                                marker.icon = UIImage(named: "marker")
                                 marker.map = self.mapView
                                 self.bounds = self.bounds.includingCoordinate(marker.position)
                             }
@@ -186,7 +183,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
     func addControls()
     {
         let image = UIImage(named: "h") as UIImage?
-        let button = UIButton(frame: CGRect(x: self.view.frame.maxX - 70, y: self.view.frame.maxY - 70, width: 70, height: 62))
+        let button = UIButton(frame: CGRect(x: self.view.frame.maxX - 66, y: self.view.frame.maxY - 70, width: 66, height: 55))
         button.setImage(image, for: .normal)
         button.setTitle("Button", for: .normal)
         button.setTitleColor(.red, for: .normal)
@@ -196,13 +193,22 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
         
         
         let imageBike = UIImage(named: "bike") as UIImage?
-        let buttonBike = UIButton(frame: CGRect(x: -1, y: self.view.frame.maxY - 70, width: 70, height: 61))
+        let buttonBike = UIButton(frame: CGRect(x: 0, y: self.view.frame.maxY - 70, width: 66, height: 55))
         buttonBike.setImage(imageBike, for: .normal)
         buttonBike.setTitle("Button", for: .normal)
         buttonBike.setTitleColor(.red, for: .normal)
         buttonBike.tag = 4
         buttonBike.addTarget(self, action: #selector(self.zoomAll), for: .touchUpInside)
         self.mapView.addSubview(buttonBike)
+        
+        let imagePoint = UIImage(named: "center") as UIImage?
+        let buttonPoint = UIButton(frame: CGRect(x: 8, y: (self.navigationController?.navigationBar.frame.maxY)! + 10, width: 37, height: 37))
+        buttonPoint.setImage(imagePoint, for: .normal)
+        buttonPoint.setTitle("Button", for: .normal)
+        buttonPoint.setTitleColor(.red, for: .normal)
+        buttonPoint.tag = 4
+        buttonPoint.addTarget(self, action: #selector(self.center), for: .touchUpInside)
+        self.mapView.addSubview(buttonPoint)
     }
     
     @objc func buttonAction(sender: UIButton!) {
@@ -213,6 +219,19 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
     
     @objc func zoomAll(sender: UIButton!) {
         self.clickShowAllLoications()
+    }
+    
+    @objc func center(sender: UIButton!) {
+        self.mapView.animate(toLocation: self.mapView.myLocation!.coordinate)
+        self.mapView.animate(toZoom: 16)
+    }
+    
+    
+    func animateButtons()
+    {
+        UIView.animate(withDuration: 1.0, delay: 1.2, options: .curveEaseOut, animations: {
+           
+        })
     }
     
     func clickShowAllLoications()
