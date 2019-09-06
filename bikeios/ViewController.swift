@@ -175,7 +175,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
                         }
                 }
                 self.progress.hide()
-                self.addControls()
+                
             })
         }
     }
@@ -183,7 +183,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
     func addControls()
     {
         let image = UIImage(named: "h") as UIImage?
-        let button = UIButton(frame: CGRect(x: self.view.frame.maxX - 66, y: self.view.frame.maxY - 70, width: 66, height: 55))
+        let button = UIButton(frame: CGRect(x: self.view.frame.maxX, y: self.view.frame.maxY - 70, width: 66, height: 55))
         button.setImage(image, for: .normal)
         button.setTitle("Button", for: .normal)
         button.setTitleColor(.red, for: .normal)
@@ -193,7 +193,7 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
         
         
         let imageBike = UIImage(named: "bike") as UIImage?
-        let buttonBike = UIButton(frame: CGRect(x: 0, y: self.view.frame.maxY - 70, width: 66, height: 55))
+        let buttonBike = UIButton(frame: CGRect(x: -66, y: self.view.frame.maxY - 70, width: 66, height: 55))
         buttonBike.setImage(imageBike, for: .normal)
         buttonBike.setTitle("Button", for: .normal)
         buttonBike.setTitleColor(.red, for: .normal)
@@ -209,6 +209,13 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
         buttonPoint.tag = 4
         buttonPoint.addTarget(self, action: #selector(self.center), for: .touchUpInside)
         self.mapView.addSubview(buttonPoint)
+        
+        UIView.animate(withDuration: 0.4,delay: 1.5, animations:{
+            buttonBike.frame.origin.x += 66
+            button.frame.origin.x -= 66
+        })
+        
+        self.drawPermitedArea()
     }
     
     @objc func buttonAction(sender: UIButton!) {
@@ -227,19 +234,53 @@ class ViewController: UIViewController , CLLocationManagerDelegate{
     }
     
     
-    func animateButtons()
-    {
-        UIView.animate(withDuration: 1.0, delay: 1.2, options: .curveEaseOut, animations: {
-           
-        })
-    }
-    
     func clickShowAllLoications()
     {
         let update = GMSCameraUpdate.fit(bounds, withPadding: 50)
         self.mapView.animate(with: update)
     }
     
+    func drawPermitedArea()
+    {
+        let path = GMSMutablePath()
+        
+        
+        path.add(CLLocationCoordinate2D(latitude: -43.4688594, longitude: -23.0292315))
+        path.add(CLLocationCoordinate2D(latitude: -43.4652009,longitude: -23.0273653))
+        path.add(CLLocationCoordinate2D(latitude: -43.4647610,longitude: -23.0283428))
+        path.add(CLLocationCoordinate2D(latitude: -43.4683659,longitude: -23.0299621))
+       /* path.add(CLLocationCoordinate2D(latitude: -43.4550198,longitude: -23.0239924))
+        path.add(CLLocationCoordinate2D(latitude: -43.4529169,longitude: -23.0233604))
+        path.add(CLLocationCoordinate2D(latitude: -43.4502562,longitude: -23.0224915))
+        path.add(CLLocationCoordinate2D(latitude: -43.4477671,longitude: -23.0218990))
+        path.add(CLLocationCoordinate2D(latitude: -43.4439905,longitude: -23.0213461))
+        path.add(CLLocationCoordinate2D(latitude: -43.4405573,longitude: -23.0205956))
+        path.add(CLLocationCoordinate2D(latitude: -43.4402569,longitude: -23.0213461))
+        path.add(CLLocationCoordinate2D(latitude: -43.4412869,longitude: -23.0217411))
+        path.add(CLLocationCoordinate2D(latitude: -43.4436043,longitude: -23.0221755))
+        path.add(CLLocationCoordinate2D(latitude: -43.4468229,longitude: -23.0232025))
+        path.add(CLLocationCoordinate2D(latitude: -43.4494408, longitude:-23.0237159))
+        path.add(CLLocationCoordinate2D(latitude: -43.4514578,longitude: -23.0241109))
+        path.add(CLLocationCoordinate2D(latitude: -43.4534319,longitude: -23.0247428))
+        path.add(CLLocationCoordinate2D(latitude: -43.4558352,longitude: -23.0254143))
+        path.add(CLLocationCoordinate2D(latitude: -43.4582813,longitude: -23.0264412))
+        path.add(CLLocationCoordinate2D(latitude: -43.4602555,longitude: -23.0271521))
+        path.add(CLLocationCoordinate2D(latitude: -43.4622725,longitude: -23.0276655))
+        path.add(CLLocationCoordinate2D(latitude: -43.4644612,longitude: -23.0284949))
+        path.add(CLLocationCoordinate2D(latitude: -43.4665640,longitude: -23.0294033))
+        path.add(CLLocationCoordinate2D(latitude: -43.4679373, longitude:-23.0301537))
+        path.add(CLLocationCoordinate2D(latitude: -43.4688814, longitude:-23.0300748))
+        path.add(CLLocationCoordinate2D(latitude: -43.4689238,longitude: -23.0297054))
+        path.add(CLLocationCoordinate2D(latitude: -43.4688487, longitude:-23.0292117))
+        path.add(CLLocationCoordinate2D(latitude: -43.4684088, longitude:-23.0287674))*/
+        
+        let polygon = GMSPolygon(path: path)
+        polygon.strokeColor = .green
+        polygon.fillColor = UIColor(red: 1.0, green: 187.0, blue: 39.0, alpha: 0.05);
+        polygon.strokeWidth = 1.0
+        polygon.map = self.mapView
+        
+    }
     
     func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
         let size = image.size
